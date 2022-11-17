@@ -4,9 +4,14 @@ pipeline {
     gradle "Gradle-7"
   }
   stages { 
-    stage('test push') {
+    stage('clone the repo') {
       steps { 
         git 'https://github.com/digitaltangent/gallery.git'
+      }
+    }
+    stage('perform installs') {
+      steps { 
+        sh 'install nodejs npm'
       }
     }
     
