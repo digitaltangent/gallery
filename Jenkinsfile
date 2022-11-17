@@ -11,7 +11,7 @@ pipeline {
     }
     stage('perform installs') {
       steps { 
-        sh 'npm install'
+        sh 'npm -v'
       }
     }
     
