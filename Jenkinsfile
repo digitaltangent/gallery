@@ -5,7 +5,7 @@ pipeline {
   stages { 
     stage("Env Variables"){
             steps{
-                sh "printenv"                                                     
+                echo "The current build number is ${env.BUILD_NUMBER}"                                                     
             }
         }
     stage('clone the repo') {
@@ -16,6 +16,7 @@ pipeline {
     stage('Install dependencies') {
       steps {
         sh 'npm install'
+        slackSend(channel: "#aleedaip1", message: "Build: ${env.BUILD_NUMBER}")
       }
     }
     //stage('Tests') {
@@ -27,8 +28,8 @@ pipeline {
 stage('Deploy to Heroku') {
   steps {
     withCredentials([usernameColonPassword(credentialsId: 'heroku', variable: 'HEROKU_CREDENTIALS' )]){
-      sh 'git push https://${HEROKU_CREDENTIALS}@git.heroku.com/immense-thicket-43199.git master'
-      slackSend(channel: "#aleedaip1", message: "Testing Slack from Jenkins!")
+      sh 'git push --force https://${HEROKU_CREDENTIALS}@git.heroku.com/immense-thicket-43199.git master'
+      slackSend(channel: "#aleedaip1", message: "Build: ${env.BUILD_NUMBER}")
     }
   }
 }      
