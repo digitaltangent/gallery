@@ -13,12 +13,6 @@ pipeline {
         sh 'npm install'
       }
     }
-    
-    stage('Start App') {
-      steps {
-        sh 'npm start'
-      }
-    }
     stage('Tests') {
       steps { 
         sh 'npm test'
@@ -32,13 +26,6 @@ stage('Deploy to Heroku') {
       slackSend(channel: "#aleedaip1", message: "Testing Slack from Jenkins!")
     }
   }
-}
-//stage('Start node') {
-  //steps {
-   //sh 'node server'
-  //}
-//}      
-    
-  
+}      
   }
 }
