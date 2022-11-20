@@ -28,11 +28,11 @@ pipeline {
         sh 'npm install'
       }
     }
-    //stage('Tests') {
-      //steps { 
+    stage('Tests') {
+      steps { 
        // sh 'npm test'
-    //  }
-   // }
+      }
+    }
     
 stage('Deploy to Heroku') {
   steps {
@@ -42,10 +42,6 @@ stage('Deploy to Heroku') {
     }
   }
 }
- stage('Start Server') {
-      steps { 
-        sh 'node server'
-      }
-    }      
+     
   }
 }
