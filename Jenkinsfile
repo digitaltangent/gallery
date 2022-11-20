@@ -30,7 +30,7 @@ pipeline {
     }
     stage('Tests') {
       steps { 
-        echo 'npm test'
+        sh 'npm test'
       }
     }
     
