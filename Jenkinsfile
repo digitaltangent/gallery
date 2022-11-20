@@ -5,10 +5,10 @@ pipeline {
   post {  
          
          success {  
-             slackSend(channel: "#aleedaip1", message: "Build: ${env.BUILD_NUMBER}")  
+             slackSend(channel: "#aleedaip1", message: "Build: ${env.BUILD_NUMBER}  URL: https://immense-thicket-43199.herokuapp.com/")  
          }  
          failure {  
-             mail bcc: '', body: "<br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "ERROR CI: Project name -> ${env.JOB_NAME}", to: "aleeda@gmail.com";  
+             mail bcc: '', body: "<br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL of build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "ERROR CI: Project name -> ${env.JOB_NAME}", to: "aleeda@gmail.com";  
          }   
      }  
   
@@ -28,16 +28,16 @@ pipeline {
         sh 'npm install'
       }
     }
-    stage('Tests') {
-      steps { 
-        sh 'npm test'
-      }
-    }
+    //stage('Tests') {
+      //steps { 
+       // sh 'npm test'
+    //  }
+   // }
     
 stage('Deploy to Heroku') {
   steps {
     withCredentials([usernameColonPassword(credentialsId: 'heroku', variable: 'HEROKU_CREDENTIALS' )]){
-      sh 'git push --force https://${HEROKU_CREDENTIALS}@git.heroku.com/immense-thicket-43199.git master'
+      sh 'git push https://${HEROKU_CREDENTIALS}@git.heroku.com/immense-thicket-43199.git master'
       
     }
   }
