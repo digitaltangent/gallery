@@ -26,14 +26,13 @@ pipeline {
     stage('Install dependencies') {
       steps {
         sh 'npm install'
-        slackSend(channel: "#aleedaip1", message: "Build: ${env.BUILD_NUMBER}")
       }
     }
-    //stage('Tests') {
-      //steps { 
-        //sh 'npm test'
-      //}
-    //}
+    stage('Tests') {
+      steps { 
+        sh 'npm test'
+      }
+    }
     
 stage('Deploy to Heroku') {
   steps {
