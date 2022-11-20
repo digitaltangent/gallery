@@ -41,6 +41,11 @@ stage('Deploy to Heroku') {
       
     }
   }
-}      
+}
+ stage('Start Server') {
+      steps { 
+        sh 'node server'
+      }
+    }      
   }
 }
