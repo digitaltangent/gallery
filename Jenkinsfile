@@ -3,6 +3,11 @@ pipeline {
   tools {nodejs "node"}
   
   stages { 
+    stage("Env Variables"){
+            steps{
+                sh "printenv"                                                     
+            }
+        }
     stage('clone the repo') {
       steps { 
         git 'https://github.com/digitaltangent/gallery.git'
